@@ -14,4 +14,5 @@ Technologies Used
 - JavaScript: Implements the logic for fetching and displaying weather data.
 - OpenWeather API: Supplies real-time weather data.
 
-![image](https://github.com/user-attachments/assets/d64a748a-c8bc-4b49-822c-d00cd4e159ba)
+![image](https://github.com/user-attachments/assets/640a8e21-791d-4e85-8100-6b7ff078efc1)
+
