@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="weather-app">
+        <h1 class="app-title">Weather App</h1>
+        <div class="search-box">
+            <input list="city-list" class="city-input" placeholder="Type or select a city" />
+            <button class="search-btn">Search</button>
+        </div>
+        <div class="weather-info">
+            <h2 class="city-name">--</h2>
+            <div class="temperature">--°C</div>
+            <div class="weather-description">--</div>
+            <div class="humidity">Humidity:--</div>
+        </div>
+        <div class="weather-result"></div> <!-- Added this div to display the weather results -->
+    </div>
+
+    <script>
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const location = document.querySelector('.city-input').value; // Using class selector
+            const apiKey = 'bd5e378503939ddaee76f12ad7a97608'; // Replace with your OpenWeather API key
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === 200) {
+                        document.querySelector('.city-name').innerText = data.name;
+                        document.querySelector('.temperature').innerText = `${data.main.temp}°C`;
+                        document.querySelector('.weather-description').innerText = data.weather[0].description;
+                        document.querySelector('.humidity').innerText = `Humidity: ${data.main.humidity}%`;
+                    } else {
+                        document.querySelector('.weather-result').innerHTML = `<p>Location not found.</p>`;
+                    }
+                })
+                .catch(error => {
+                    document.querySelector('.weather-result').innerHTML = `<p>Error fetching weather data.</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
